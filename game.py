@@ -39,17 +39,30 @@ def draw_player():
     pygame.draw.circle(screen, (255, 0, 0), (player_x, player_y), 5)
     pygame.draw.line(screen, (255, 0, 0), (player_x, player_y), (player_x + math.sin(player_angle) * 10, player_y + math.cos(player_angle) * 10))
 
+clock = pygame.time.Clock()
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    
+
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LEFT:
+            player_angle += 0.1
+        if event.key == pygame.K_RIGHT:
+            player_angle -= 0.1
+        if event.key == pygame.K_UP:
+            player_angle += 0.1
+        if event.key == pygame.K_DOWN:
+            player_angle -= 0.1
+        
+
     screen.fill((0, 0, 0))
     
     draw_map()
     draw_player()
 
     pygame.display.flip()
+    clock.tick(60)
 
 pygame.quit()
